@@ -49,6 +49,8 @@ defmodule Samly.AuthHandler do
       csrf_token: get_csrf_token()
     ]
 
+    File.write("/tmp/auth_handler.txt", inspect(opts))
+
     conn
     |> put_resp_header("content-type", "text/html")
     |> send_resp(200, EEx.eval_string(@sso_init_resp_template, opts))
